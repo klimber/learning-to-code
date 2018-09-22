@@ -1,2 +1,2 @@
 # learning-to-code
-Códigos que escrevi enquanto aprendia a programar
+Códigos que escrevi aprendendo a programar
