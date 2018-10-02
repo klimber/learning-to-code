@@ -19,5 +19,7 @@ task desafio(type: JavaExec) {
 
 dependencies {
 	compile files('libs/submit-desafio-java-1.jar')
-	compile files('libs/desafio-java-1.jar')
+	
+	 // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
 }
