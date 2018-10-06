@@ -103,6 +103,9 @@ public class NeedForSpeedApplication implements NeedForSpeedInterface {
 	@Override
 	@Desafio("buscarCarros")
 	public List<Long> buscarCarros(Long idPiloto) {
+		if(!listaPiloto.containsKey(idPiloto)){
+			throw new PilotoNaoEncontradoException();
+		}
 		return listaCarro
 				.values().stream()
 				.filter(carro -> carro.getIdPiloto().equals(idPiloto))
@@ -175,7 +178,7 @@ public class NeedForSpeedApplication implements NeedForSpeedInterface {
 		if(!listaPiloto.containsKey(idPiloto)){
 			throw new PilotoNaoEncontradoException();
 		}
-		return listaCarro.values().stream().filter(carro -> carro.getIdPiloto().equals(idPiloto)).map(carro -> carro.getPreco()).reduce(BigDecimal.ZERO, BigDecimal::add).add(listaPiloto.get(idPiloto).getDinheiro());
+		return listaCarro.values().stream().filter(carro -> carro.getIdPiloto().equals(idPiloto)).map(carro -> carro.getPreco()).reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 
 	@Override
