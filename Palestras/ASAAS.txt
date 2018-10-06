@@ -1,0 +1,35 @@
+ASAAS
+
+Focado em micro e pequenos empreendedores, representam 20% da população economicamente ativa.
+Estes ficam para trás em negociações com bancos e outras instituições
+	quando emcomparação com grandes empresas.
+
+Estes empreendedores gastam muito tempo tentando cobrar dos seus clientes
+E o desenvolvimento dos seus negócios acaba sofrendo.
+
+ASAAS automatiza a parte de cobrança. FEATURES:
+
+	-Single Human Touch -> Somente 1 pessoa designada para resolver as
+		dúvidas e não vários setores separados.
+	-Cobrança automatizada, pagamento de fornecedores automatizado com o próprio saldo do ASAAS
+
+DEV TEAM
+
+	CTO: FERNANDO
+	-DESIGN
+	-BACK-OFFICE
+	-MOBILE
+	-PRODUCTION
+
+STACK:
+	
+	-Grails
+	-Groovy
+	-MySQL
+	-HTML5, CSS3, JavaScript
+	-React
+	-Xamarin para desenvolvimento ANDROID e IOS
+	
+LOCAL:
+
+	-AuriPlaza, ao lado do Garten
