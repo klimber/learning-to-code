@@ -1,9 +1,6 @@
 package br.com.codenation;
 
-import static org.junit.Assert.*;
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -40,10 +37,10 @@ public class DesafioMeuTimeApplicationTest {
 
 		Time timeTeste = teste.listaTime.get(1L);
 
-		Assert.assertEquals("Nome Incorreto", "Real Madrid", timeTeste.nome);
-		Assert.assertEquals("Data incorreta", LocalDate.of(2016, 1, 1), timeTeste.dataCriacao);
-		Assert.assertEquals("Cor Principal incorreta", "Branco", timeTeste.corUniformePrincipal);
-		Assert.assertEquals("Cor Secundária incorreta", "Azul", timeTeste.corUniformeSecundario);
+		Assert.assertEquals("Nome Incorreto", "Real Madrid", timeTeste.getNome());
+		Assert.assertEquals("Data incorreta", LocalDate.of(2016, 1, 1), timeTeste.getDataCriacao());
+		Assert.assertEquals("Cor Principal incorreta", "Branco", timeTeste.getCorUniformePrincipal());
+		Assert.assertEquals("Cor Secundária incorreta", "Azul", timeTeste.getCorUniformeSecundario());
 
 		try {
 			teste.incluirTime(1l, "Real Madrid", LocalDate.of(2016, 1, 1), "Branco", "Azul");
@@ -70,11 +67,11 @@ public class DesafioMeuTimeApplicationTest {
 
 		Jogador jogadorTeste = teste.listaJogador.get(3L);
 
-		Assert.assertEquals("Id do Time Incorreto", Long.valueOf(1), jogadorTeste.idTime);
-		Assert.assertEquals("Nome Incorreto", "Allan3", jogadorTeste.nome);
-		Assert.assertEquals("Data Nasc. Incorreta", LocalDate.of(1993, 03, 24), jogadorTeste.dataNascimento);
-		Assert.assertEquals("Habilidade Incorreta", Integer.valueOf(10), jogadorTeste.nivelHabilidade);
-		Assert.assertEquals("Salário Incorreto", BigDecimal.valueOf(1000), jogadorTeste.salario);
+		Assert.assertEquals("Id do Time Incorreto", Long.valueOf(1), jogadorTeste.getIdTime());
+		Assert.assertEquals("Nome Incorreto", "Allan3", jogadorTeste.getNome());
+		Assert.assertEquals("Data Nasc. Incorreta", LocalDate.of(1993, 03, 24), jogadorTeste.getDataNascimento());
+		Assert.assertEquals("Habilidade Incorreta", Integer.valueOf(10), jogadorTeste.getNivelHabilidade());
+		Assert.assertEquals("Salário Incorreto", BigDecimal.valueOf(1000), jogadorTeste.getSalario());
 
 		try {
 			teste.incluirJogador(1L, 1L, "Allan Krueger", LocalDate.of(1993, 03, 24), 3, BigDecimal.valueOf(2000));
@@ -101,7 +98,8 @@ public class DesafioMeuTimeApplicationTest {
 		}
 
 		teste.definirCapitao(Long.valueOf(5));
-		Assert.assertEquals("Deveria ser Capitão", true, teste.listaJogador.get(5L).capitao);
+		Assert.assertEquals("Deveria ser Capitão", Long.valueOf(5),
+				teste.listaTime.get(teste.listaJogador.get(5L).getIdTime()).getJogadorCapitao().get());
 
 	}
 
@@ -201,104 +199,111 @@ public class DesafioMeuTimeApplicationTest {
 
 		Assert.assertEquals("Deveria ser o 4", Long.valueOf(4), teste.buscarMelhorJogadorDoTime(2L));
 	}
-	
+
 	@Test
 	public void testeBuscarJogadorMaisVelho() {
 		DesafioMeuTimeApplication teste = new DesafioMeuTimeApplication();
-		
+
 		try {
 			teste.buscarJogadorMaisVelho(1L);
 			Assert.assertTrue("Deveria dar Exceção", false);
 		} catch (Exception e) {
 			Assert.assertTrue("Deveria ser TimeNaoEncontradoException", e instanceof TimeNaoEncontradoException);
 		}
-		
+
 		incluirTimes(teste);
 		incluirJogadores(teste);
-		
-		Assert.assertEquals("Deveria ser Leonardo1" , Long.valueOf(6), teste.buscarJogadorMaisVelho(2L));
+
+		Assert.assertEquals("Deveria ser Leonardo1", Long.valueOf(6), teste.buscarJogadorMaisVelho(2L));
 	}
-	
+
 	@Test
 	public void testeBuscarTimes() {
 		DesafioMeuTimeApplication teste = new DesafioMeuTimeApplication();
-		
+
 		Assert.assertEquals("Deveria ser Lista Vazia", new ArrayList<Long>(), teste.buscarTimes());
-		
+
 		incluirTimes(teste);
-		
+
 		ArrayList<Long> listatimes = new ArrayList<Long>();
 		listatimes.add(1L);
 		listatimes.add(2L);
 		listatimes.add(3L);
-		
+
 		Assert.assertEquals("Deveriam ser iguais", listatimes, teste.buscarTimes());
 	}
-	
+
 	@Test
 	public void testeBuscarJogadorMaiorSalario() {
 		DesafioMeuTimeApplication teste = new DesafioMeuTimeApplication();
-		
+
 		try {
 			teste.buscarJogadorMaiorSalario(2L);
 			Assert.assertTrue("Deveria dar Exceção", false);
 		} catch (Exception e) {
 			Assert.assertTrue("Deveria ser TimeNaoEncontradoException", e instanceof TimeNaoEncontradoException);
 		}
-		
+
 		incluirTimes(teste);
 		incluirJogadores(teste);
-		
+
 		Assert.assertEquals("Deveria ser Leonardo3", Long.valueOf(6), teste.buscarJogadorMaiorSalario(2L));
 	}
-	
+
 	@Test
 	public void testeBuscarSalarioDoJogador() {
 		DesafioMeuTimeApplication teste = new DesafioMeuTimeApplication();
-		
+
 		try {
 			teste.buscarSalarioDoJogador(6L);
 			Assert.assertTrue("Deveria dar Exceção", false);
 		} catch (Exception e) {
 			Assert.assertTrue("Deveria ser 0", e instanceof JogadorNaoEncontradoException);
 		}
-		
+
 		incluirTimes(teste);
 		incluirJogadores(teste);
-		
+
 		Assert.assertEquals("Deveria ser 0", BigDecimal.valueOf(0), teste.buscarSalarioDoJogador(5L));
 	}
-	
+
 	@Test
 	public void testeBuscarTopJogadores() {
 		DesafioMeuTimeApplication teste = new DesafioMeuTimeApplication();
-		
+
 		Assert.assertEquals("Deveria ser lista vazia", new ArrayList<Long>(), teste.buscarTopJogadores(3));
-		
+
 		incluirTimes(teste);
 		incluirJogadores(teste);
-		
+
 		ArrayList<Long> listadostop = new ArrayList<Long>();
 		listadostop.add(4L);
 		listadostop.add(5L);
 		listadostop.add(6L);
-		
+
 		Assert.assertEquals("Lista Incorreta", listadostop, teste.buscarTopJogadores(3));
 	}
-	
+
 	@Test
 	public void testeBucarCorCamisetaTimeDeFora() {
 		DesafioMeuTimeApplication teste = new DesafioMeuTimeApplication();
-		
+
 		try {
 			teste.buscarCorCamisaTimeDeFora(1L, 2L);
 			Assert.assertTrue("Deveria dar Exceção", false);
 		} catch (Exception e) {
 			Assert.assertTrue("Deveria ser TimeNaoEncontradoException", e instanceof TimeNaoEncontradoException);
 		}
-		
+
 		incluirTimes(teste);
 		
+		try {
+			teste.buscarCorCamisaTimeDeFora(1L, 5L);
+			Assert.assertTrue("Deveria dar Exceção", false);
+		} catch (Exception e) {
+			Assert.assertTrue("Deveria ser TimeNaoEncontradoException", e instanceof TimeNaoEncontradoException);
+		}
+
 		Assert.assertEquals("Deveria ser prata", "Prata", teste.buscarCorCamisaTimeDeFora(1L, 2L));
 		Assert.assertEquals("Deveria ser Vermelho", "Vermelho", teste.buscarCorCamisaTimeDeFora(1L, 3L));
 	}
