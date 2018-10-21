@@ -1,0 +1,25 @@
+<table>
+  <tr *ngFor="let time of times">
+    <td>{{time.id}}</td>
+    <td>{{time.nome}}</td>
+  </tr>
+</table>
+
+<form [formGroup]="profileForm">
+  
+  <label>
+    ID:
+    <input type="text" formControlName="id">
+  </label>
+
+  <label>
+    Nome:
+    <input type="text" formControlName="nome">
+  </label>
+
+  <label>
+    Data:
+    <input type="text" formControlName="Data">
+  </label>
+
+</form>
