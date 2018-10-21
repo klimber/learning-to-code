@@ -1,0 +1,11 @@
+---Treasy---
+
+Auxiliar empresas a definir e alcançar objetivos empresariais.
+
+""Fechando"" = Todas as sextas 1 hora para reavaliar os conteúdos da semana.
+
+Sistema de Gestão Orçamentária SaaS
+
+Diversos ERPs
+	Implementações separadas para cada um.
+
