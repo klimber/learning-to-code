@@ -1,0 +1,105 @@
+//This Kantu script can extract a table of unknown size from a website
+//However, if you know the collumn count it may help to specify it at while function
+//If some row has less collumns it wont be a problem, as it will trigger the gotoif and go to the new row
+//Headers are NOT extracted
+//The first row will always be a 0
+{
+  "CreationDate": "2018-11-9",
+  "Commands": [
+    {
+      "Command": "open",
+      "Target": "https://www.w3schools.com/html/html_tables.asp",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!ErrorIgnore"
+    },
+    {
+      "Command": "store",
+      "Target": "FAST",
+      "Value": "!replayspeed"
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "i"
+    },
+    {
+      "Command": "store",
+      "Target": "0",
+      "Value": "!csvLine"
+    },
+    {
+      "Command": "label",
+      "Target": "nextRow",
+      "Value": ""
+    },
+    {
+      "Command": "csvSave",
+      "Target": "tabela",
+      "Value": ""
+    },
+    {
+      "Command": "storeEval",
+      "Target": "${i} + 1",
+      "Value": "i"
+    },
+    {
+      "Command": "store",
+      "Target": "1",
+      "Value": "j"
+    },
+    {
+      "Command": "storeText",
+      "Target": "//table[@id=\"customers\"]/tbody/tr[${i}]/td[${j}]",
+      "Value": "!csvLine"
+    },
+    {
+      "Command": "gotoIf",
+      "Target": "!${!LastCommandOK}",
+      "Value": "finaliza"
+    },
+    {
+      "Command": "while",
+      "Target": "(${j} < 3)",
+      "Value": ""
+    },
+    {
+      "Command": "storeEval",
+      "Target": "${j} +1",
+      "Value": "j"
+    },
+    {
+      "Command": "storeText",
+      "Target": "//table[@id=\"customers\"]/tbody/tr[${i}]/td[${j}]",
+      "Value": "!csvLine"
+    },
+    {
+      "Command": "gotoIf",
+      "Target": "!${!LastCommandOK}",
+      "Value": "nextRow"
+    },
+    {
+      "Command": "endWhile",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "nextRow",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "finaliza",
+      "Value": ""
+    },
+    {
+      "Command": "localStorageExport",
+      "Target": "tabela.csv",
+      "Value": ""
+    }
+  ]
+}
