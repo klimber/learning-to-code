@@ -21,7 +21,56 @@ def main():
     st.subheader("E utilizar *sintaxe* de ~~html~~ **MarkDown**!")
     st.write('Utilizando "\*" e "~"')
 
+    st.header("Aula StreamLit 3")
     
+    st.subheader("Como utilizar botões!")
+    st.write("Clique no botão a seguir:")
+    botao = st.button("Clique em mim!")
+    if botao:
+        st.write("Você clicou no botão!")
+    
+    st.subheader("Agora vamos fazer um checkbox!")
+    checkbox = st.checkbox("Eu sou um checkbox!")
+    if(checkbox):
+        st.write("O checkbox está marcado!")
+
+    st.subheader("Agora vamos fazer um radioGroup!")
+    radio = st.radio("Um radioGroup tem diversas opções!", ("Eu sou a opção 1", "Opção 2, eu sou"))
+    if radio == "Eu sou a opção 1":
+        st.write("Você selecionou a primeira opção!")
+    if radio == "Opção 2, eu sou":
+        st.write("Que a força esteja com você!")
+    
+    st.subheader("E uma caixa de seleção única?")
+    selectBox = st.selectbox("Eu sou a sua caixa de seleção favorita", ("Choose an Option","Red Pill", "Blue Pill", "Yellow Pill?"))
+    if selectBox == "Red Pill":
+        st.write("Uma verdade desegradável será revelada.")
+    if selectBox == "Blue Pill":
+        st.write("A ignorância é uma virtude.")
+    if selectBox == "Yellow Pill?":
+        st.write("Are you okai?")
+    
+    st.subheader("A famigerada caixa de seleção MÚLTIPLA:")
+    multiSelect = st.multiselect("Eu sou a caixa de seleção múltipla, muitos devs não gostam de mim, sniff", ("Press F", "The answer is 42", "All of the above"))
+    if "Press F" in multiSelect:
+        st.write("You paid the due respect!")
+    if "The answer is 42" in multiSelect:
+        st.write("Yes, it is.")
+    if "All of the above" in multiSelect:
+        if len(multiSelect) > 1:
+            st.write("Redundant, aren't we?")
+        else:
+            st.write("This is a multiselection box, you know?")
+    
+    st.subheader("Dá pra enviar arquivos?")
+    st.write("Dá sim, parceiro, saca só:")
+    myFile = st.file_uploader("Pode vir quente!", 'csv')
+    if myFile is not None:
+        st.write("Seu arquivo está seguro em minhas mãos!")
+    
+
+
+
 
 if __name__ == "__main__":
     main()
